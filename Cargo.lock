@@ -698,13 +698,14 @@ dependencies = [
 
 [[package]]
 name = "cunzhi"
-version = "0.3.7"
+version = "0.3.8"
 dependencies = [
  "anyhow",
- "base64 0.21.7",
+ "base64 0.22.1",
  "chrono",
  "dirs 5.0.1",
  "env_logger",
+ "fastrand",
  "log",
  "percent-encoding",
  "regex",

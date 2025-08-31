@@ -13,13 +13,13 @@ pub const DESCRIPTION: &str = "智能代码审查工具";
 pub const VERSION: &str = env!("CARGO_PKG_VERSION");
 
 /// 应用程序作者
-pub const AUTHOR: &str = "imhuso";
+pub const AUTHOR: &str = "agassiz";
 
 /// 应用程序主页
-pub const HOMEPAGE: &str = "https://github.com/imhuso/cunzhi";
+pub const HOMEPAGE: &str = "https://github.com/agassiz/cunzhi";
 
 /// 应用程序仓库
-pub const REPOSITORY: &str = "https://github.com/imhuso/cunzhi";
+pub const REPOSITORY: &str = "https://github.com/agassiz/cunzhi";
 
 /// 应用程序许可证
 pub const LICENSE: &str = "MIT";
@@ -31,7 +31,7 @@ pub const CONFIG_FILE_NAME: &str = "config.json";
 pub const LOG_FILE_PREFIX: &str = "cunzhi";
 
 /// 应用程序标识符（用于系统集成）
-pub const APP_IDENTIFIER: &str = "com.imhuso.cunzhi";
+pub const APP_IDENTIFIER: &str = "com.agassiz.cunzhi";
 
 /// 用户代理字符串
 pub const USER_AGENT: &str = concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION"));

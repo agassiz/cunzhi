@@ -23,10 +23,16 @@ export default defineConfig({
       },
     }),
     presetWebFonts({
+      // 禁用 CDN 获取，避免网络超时问题
+      provider: 'none',
       fonts: {
         sans: 'Inter:400,500,600,700',
         mono: 'JetBrains Mono:400,500,600',
       },
+      // 添加超时配置和错误处理
+      timeout: 5000, // 5秒超时
+      // 当字体获取失败时，使用本地回退字体
+      fallback: true,
     }),
   ],
   theme: {
