@@ -21,7 +21,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Get release information
         id: release_info
@@ -45,8 +45,8 @@ jobs:
 
           # 检查 release assets 是否存在
           # URL 格式：/download/{TAG_NAME}/cunzhi-cli-{TAG_NAME}-{platform}.tar.gz
-          INTEL_URL="https://github.com/imhuso/cunzhi/releases/download/${TAG_NAME}/cunzhi-cli-${TAG_NAME}-macos-x86_64.tar.gz"
-          ARM_URL="https://github.com/imhuso/cunzhi/releases/download/${TAG_NAME}/cunzhi-cli-${TAG_NAME}-macos-aarch64.tar.gz"
+          INTEL_URL="https://github.com/agassiz/cunzhi/releases/download/${TAG_NAME}/cunzhi-cli-${TAG_NAME}-macos-x86_64.tar.gz"
+          ARM_URL="https://github.com/agassiz/cunzhi/releases/download/${TAG_NAME}/cunzhi-cli-${TAG_NAME}-macos-aarch64.tar.gz"
 
           echo "Checking Intel asset: $INTEL_URL"
           if ! curl --head --fail "$INTEL_URL" > /dev/null 2>&1; then
@@ -68,8 +68,8 @@ jobs:
           TAG_NAME="${{ steps.release_info.outputs.tag_name }}"
           VERSION_NUMBER="${{ steps.release_info.outputs.version_number }}"
 
-          INTEL_URL="https://github.com/imhuso/cunzhi/releases/download/${TAG_NAME}/cunzhi-cli-${TAG_NAME}-macos-x86_64.tar.gz"
-          ARM_URL="https://github.com/imhuso/cunzhi/releases/download/${TAG_NAME}/cunzhi-cli-${TAG_NAME}-macos-aarch64.tar.gz"
+          INTEL_URL="https://github.com/agassiz/cunzhi/releases/download/${TAG_NAME}/cunzhi-cli-${TAG_NAME}-macos-x86_64.tar.gz"
+          ARM_URL="https://github.com/agassiz/cunzhi/releases/download/${TAG_NAME}/cunzhi-cli-${TAG_NAME}-macos-aarch64.tar.gz"
 
           echo "Downloading and calculating SHA256..."
 
@@ -91,8 +91,8 @@ jobs:
       - name: Checkout homebrew-cunzhi repository
         uses: actions/checkout@v4
         with:
-          repository: imhuso/homebrew-cunzhi
-          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          repository: agassiz/homebrew-cunzhi
+          token: ${{ secrets.GITHUB_TOKEN }}
           path: homebrew-tap
 
       - name: Configure git for homebrew-tap
@@ -129,11 +129,11 @@ jobs:
           sed -i "s|version \".*\"|version \"${VERSION_NUMBER}\"|g" Formula/cunzhi.rb
 
           # 更新 Intel 版本的 URL 和 SHA256（适配新的 on_intel 语法）
-          sed -i "s|https://github.com/imhuso/cunzhi/releases/download/v[0-9.]*/cunzhi-cli-v[0-9.]*-macos-x86_64.tar.gz|${INTEL_URL}|g" Formula/cunzhi.rb
+          sed -i "s|https://github.com/agassiz/cunzhi/releases/download/v[0-9.]*/cunzhi-cli-v[0-9.]*-macos-x86_64.tar.gz|${INTEL_URL}|g" Formula/cunzhi.rb
           sed -i "/on_intel do/,/end/ { /sha256/ s|sha256[[:space:]]*\".*\"|sha256  \"${INTEL_SHA256}\"|; }" Formula/cunzhi.rb
 
           # 更新 ARM 版本的 URL 和 SHA256（适配新的 on_arm 语法）
-          sed -i "s|https://github.com/imhuso/cunzhi/releases/download/v[0-9.]*/cunzhi-cli-v[0-9.]*-macos-aarch64.tar.gz|${ARM_URL}|g" Formula/cunzhi.rb
+          sed -i "s|https://github.com/agassiz/cunzhi/releases/download/v[0-9.]*/cunzhi-cli-v[0-9.]*-macos-aarch64.tar.gz|${ARM_URL}|g" Formula/cunzhi.rb
           sed -i "/on_arm do/,/end/ { /sha256/ s|sha256[[:space:]]*\".*\"|sha256  \"${ARM_SHA256}\"|; }" Formula/cunzhi.rb
 
       - name: Verify Formula changes
@@ -173,5 +173,5 @@ jobs:
         run: |
           echo "🧪 Formula update completed successfully!"
           echo "You can test the formula with:"
-          echo "  brew tap imhuso/cunzhi"
+          echo "  brew tap agassiz/cunzhi"
           echo "  brew install cunzhi"

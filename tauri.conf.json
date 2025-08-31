@@ -2,7 +2,7 @@
   "$schema": "https://schema.tauri.app/config/2.0.0",
   "productName": "寸止",
   "version": "0.4.0",
-  "identifier": "com.imhuso.cunzhi",
+  "identifier": "com.agassiz.cunzhi",
   "build": {
     "beforeDevCommand": "pnpm dev",
     "beforeBuildCommand": "pnpm build",
@@ -78,7 +78,7 @@
     "updater": {
       "active": true,
       "endpoints": [
-        "https://api.github.com/repos/imhuso/cunzhi/releases/latest"
+        "https://api.github.com/repos/agassiz/cunzhi/releases/latest"
       ],
       "dialog": false,
       "pubkey": ""
